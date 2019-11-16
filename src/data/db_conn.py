@@ -16,11 +16,24 @@ def _open_db_demo(demo_name: str):
     return conn
 
 
-def _get_shopping_history(demo_name: str):
+def get_shopping_history(demo_name: str):
     conn = _open_db_demo(demo_name)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM {}".format(PURCHASES_TABLE_NAME))
+    rows = cursor.fetchall()
+
+    return rows
+
+
+def get_products_by_prod_cat(demo_name: str, prod_cat: str):
+    conn = _open_db_demo(demo_name)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM {} "
+                   "WHERE prod_cat = ?"
+                   "".format(PRODUCT_DATA_TABLE_NAME),
+                   (prod_cat,))
     rows = cursor.fetchall()
 
     return rows

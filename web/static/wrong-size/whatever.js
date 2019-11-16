@@ -90,7 +90,7 @@ chatbotOverlay.addEventListener('click', e => {
 addToBasketBtn.addEventListener('click', e => {
     e.preventDefault();
     
-    showChatbot
+    showChatbot();
     sendChat('');
 });
 

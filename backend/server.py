@@ -1,16 +1,18 @@
-from bottle import route, run, TEMPLATE_PATH, view
+from bottle import route, run, static_file, get
 from dotenv import load_dotenv
-
-from backend.services import get_some_stuff
 
 
 @route("/")
-@view("index")
 def index():
-    return dict(logs=get_some_stuff())
+    return server_static("usually-returned/index.html")
+
+
+@get("/static/<filepath:path>")
+def server_static(filepath):
+    return static_file(filepath, root="web/static")
 
 
 if __name__ == '__main__':
-    TEMPLATE_PATH.append("../web/templates")
+    # TEMPLATE_PATH.append("../web/index_files")
     load_dotenv()
     run(host="localhost", port=8080, debug=True)

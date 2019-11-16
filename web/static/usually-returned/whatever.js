@@ -63,7 +63,7 @@ const sendChat = (message) => {
     })
         .then(response => response.text())
         .then(message => {
-            if (message) return;
+            if (message == '') return;
 
             messagesState = messagesState.filter(item => !item.indicator);
 

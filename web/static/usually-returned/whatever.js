@@ -51,7 +51,7 @@ const sendChat = (message) => {
     renderMessages();
 
     const data = new FormData();
-    data.append('case_tag', message == '' ? 'returned_stuff' : '');
+    data.append('case_tag', message == '' ? 'refunded_stuff' : '');
     data.append('input', message);
     data.append('size', 0.0);
 

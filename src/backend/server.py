@@ -20,6 +20,12 @@ def index():
 
 
 @enable_cors
+@route("/3")
+def index():
+    return wrong_price("index.html")
+
+
+@enable_cors
 @post("/chat")
 def handle_input():
     input = request.forms.get("input")
@@ -38,6 +44,12 @@ def usually_returned(filepath):
 @get("/wrong-size/<filepath:path>")
 def wrong_size(filepath):
     return static_file(filepath, root="web/static/wrong-size")
+
+
+@enable_cors
+@get("/wrong-price/<filepath:path>")
+def wrong_price(filepath):
+    return static_file(filepath, root="web/static/wrong-price")
 
 
 if __name__ == '__main__':

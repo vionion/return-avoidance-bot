@@ -4,12 +4,12 @@ from dotenv import load_dotenv
 
 @route("/")
 def index():
-    return server_static("usually-returned/index.html")
+    return server_static("index.html")
 
 
-@get("/static/<filepath:path>")
+@get("/usually-returned/<filepath:path>")
 def server_static(filepath):
-    return static_file(filepath, root="web/static")
+    return static_file(filepath, root="web/static/usually-returned")
 
 
 if __name__ == '__main__':

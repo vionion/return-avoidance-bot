@@ -20,7 +20,7 @@ _RETURNS_SQL = ("CREATE TABLE IF NOT EXISTS {} ("
                 "prod_name TEXT , "
                 "return_timestamp INTEGER , "
                 "prod_cat TEXT , "
-                "prod_size INTEGER , "
+                "prod_size FLOAT , "
                 "prod_price FLOAT , "
                 "PRIMARY KEY (cus_name, prod_name, return_timestamp)"
                 ")").format(RETURNS_TABLE_NAME)
@@ -30,7 +30,7 @@ _PURCHASES_SQL = ("CREATE TABLE IF NOT EXISTS {} ("
                   "prod_name TEXT , "
                   "purchase_timestamp INTEGER , "
                   "prod_cat TEXT , "
-                  "prod_size INTEGER , "
+                  "prod_size FLOAT , "
                   "prod_price FLOAT , "
                   "PRIMARY KEY (cus_name, prod_name, purchase_timestamp)"
                   ")").format(PURCHASES_TABLE_NAME)
@@ -133,7 +133,7 @@ def _gen_purchase_data(conn: Connection):
             "VALUES (?, ?, ?, ?, ?, ?)"
             "".format(PURCHASES_TABLE_NAME),
             (demo_cus_name, prod_name, purchase_timestamp, demo_prod_cat,
-             demo_prod_size + choice([-0.5, 0, 0.5], 1, p=[0.25, 0.5, 0.25]),
+             demo_prod_size + choice([-0.5, 0, 0.5], p=[0.25, 0.5, 0.25]),
              prod_price))
 
         conn.commit()

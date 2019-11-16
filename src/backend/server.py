@@ -15,7 +15,7 @@ def index():
 def handle_input():
     input = request.forms.get("input")
     case_tag = request.forms.get("case_tag")
-    size = int(request.forms.get("size"))
+    size = float(request.forms.get("size"))
     return chat(case_tag, size, input)
 
 

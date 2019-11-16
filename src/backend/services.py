@@ -1,3 +1,5 @@
+from data.db_conn import _get_shopping_history
+
 default_dialog_options = {
     "ok, removing":
         ["yes", "yep", "sure", "let's do it", "lets do it", "why not"],
@@ -14,7 +16,32 @@ def chat(case_tag, size, input):
     elif case_tag == "refunded_stuff":
         return "We recently experienced a lot of returns for this product. Maybe you want to look for alternatives?"
     elif case_tag == "price":
-        return "We noticed that you usually buy products from different price category. Just checking if you want to continue."
+        return "We noticed that you usually buy products from different price category. " \
+               "Just checking if you want to continue."
     for answer in dialog_options:
         if lowercase in dialog_options[answer]:
             return answer
+
+
+def is_abnormal_size(size: float, demo_cus_name: str = "demo_customer", is_flex: bool = False):
+    rows = _get_shopping_history(demo_name="demo_1")
+
+    purchases = list(filter(lambda row: row[0] == demo_cus_name, rows))
+
+    possible_sizes = set([purchase[4] for purchase in purchases])
+
+    if is_flex:
+        smaller_sizes = set([size - 0.5 for size in possible_sizes])
+        larger_sizes = set([size + 0.5 for size in possible_sizes])
+
+        possible_sizes = possible_sizes | smaller_sizes | larger_sizes
+
+    return size in possible_sizes
+
+
+if __name__ == '__main__':
+    print(is_abnormal_size(36))
+    print(is_abnormal_size(37))
+    print(is_abnormal_size(37, is_flex=True))
+    print(is_abnormal_size(35))
+    print(is_abnormal_size(35, is_flex=True))

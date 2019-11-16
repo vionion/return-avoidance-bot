@@ -1,10 +1,10 @@
 from datetime import datetime
-from random import choice
 from sqlite3 import Connection
 
 import numpy as np
+from numpy.random import choice
 
-from data.db_conn import _open_db_demo, PRODUCT_DATA_TABLE_NAME, RETURNS_TABLE_NAME, PURCHASES_TABLE_NAME
+from src.data.db_conn import _open_db_demo, PRODUCT_DATA_TABLE_NAME, RETURNS_TABLE_NAME, PURCHASES_TABLE_NAME
 
 PROD_CATS = ["hobbies", "shoes", "clothes", "food"]
 

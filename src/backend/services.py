@@ -1,4 +1,4 @@
-from data.db_conn import _get_shopping_history
+from src.data.db_conn import _get_shopping_history
 
 default_dialog_options = {
     "ok, removing":

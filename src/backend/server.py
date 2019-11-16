@@ -2,9 +2,8 @@ import os
 
 from bottle import route, run, static_file, get, post, request
 
-from data.data_generator import gen_demo_1
-
-from backend.services import chat
+from src.backend.services import chat
+from src.data.data_generator import gen_demo_1
 
 
 @route("/")

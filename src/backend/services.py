@@ -6,7 +6,9 @@ default_dialog_options = {
     "ok, removing":
         ["yes", "yep", "sure", "let's do it", "lets do it", "why not"],
     "if you say so":
-        ["no", "nope", "abort", "cancel"]
+        ["no", "nope", "abort", "cancel"],
+    "( ͡° ͜ʖ ͡°)":
+        ["maybe"]
 }
 
 

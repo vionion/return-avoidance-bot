@@ -83,11 +83,25 @@ const chatbotOverlay = document.querySelector('.chatbot-overlay');
 let messagesState = [];
 let writingIndicator = false;
 
+chatbotOverlay.addEventListener('click', e => {
+    hideChatbot();
+});
+
 addToBasketBtn.addEventListener('click', e => {
     e.preventDefault();
     
+    showChatbot
     sendChat('');
 });
+
+document.querySelector('.chatbot-form').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const input = document.querySelector('.chatbot-form input');
+
+    sendChat(input.value, true);
+    input.value = '';
+})
 
 const sendChat = (message) => {
     if (message != '') {
@@ -128,6 +142,20 @@ const sendIndicator = () => {
     messagesState.push({ indicator: true });
 
     renderMessages();
+};
+
+const showChatbot = () => {
+    chatbotBox.classList.remove('chatbot-hidden');
+    chatbotOverlay.classList.remove('chatbot-hidden');
+
+    chatbotBox.querySelector('input').focus();
+};
+
+const hideChatbot = () => {
+    chatbotBox.querySelector('input').blur();
+
+    chatbotBox.classList.add('chatbot-hidden');
+    chatbotOverlay.classList.add('chatbot-hidden');
 };
 
 const renderMessages = () => {

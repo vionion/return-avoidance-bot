@@ -13,7 +13,8 @@ def index():
 def handle_input():
     input = request.forms.get("input")
     case_tag = request.forms.get("case_tag")
-    return chat(case_tag, input)
+    size = request.forms.get("size")
+    return chat(case_tag, size, input)
 
 
 @get("/usually-returned/<filepath:path>")

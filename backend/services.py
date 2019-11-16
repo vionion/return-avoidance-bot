@@ -6,7 +6,7 @@ dialog_options = {
 }
 
 
-def chat(case_tag, input):
+def chat(case_tag, size, input):
     lowercase = input.lower()
     for answer in dialog_options:
         if lowercase in dialog_options[answer]:

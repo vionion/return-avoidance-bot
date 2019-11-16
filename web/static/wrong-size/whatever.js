@@ -27,15 +27,16 @@ const colorsList = document.querySelector('#color-select');
         const liElement = e.target.parentNode.parentNode.parentNode
             .parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
         
+        const oldIndex = currentColor;
         const index = [...colorsList.children].indexOf(liElement);
         currentColor = index;
 
         if (!sizes[index].some(el => el == selectedSize)) {
-            const sizeIndex = sizes[index].indexOf(selectedSize);
+            const sizeIndex = sizes[oldIndex].indexOf(selectedSize);
             if (sizeIndex !== -1) {
                 console.warn('lol');
                 // Fallback to other size when there is no such size in that color.
-                selectedSize = sizes[index][sizeIndex-1] || sizes[index][sizeIndex+1] || null;
+                selectedSize = sizes[index][sizeIndex-1] || sizes[index][sizeIndex+1] || sizes[index][0];
             }
         }
 

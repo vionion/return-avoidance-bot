@@ -10,7 +10,13 @@ from src.data.data_generator import gen_demo_1
 @enable_cors
 @route("/")
 def index():
-    return server_static("index.html")
+    return usually_returned("index.html")
+
+
+@enable_cors
+@route("/2")
+def index():
+    return wrong_size("index.html")
 
 
 @enable_cors
@@ -24,8 +30,14 @@ def handle_input():
 
 @enable_cors
 @get("/usually-returned/<filepath:path>")
-def server_static(filepath):
+def usually_returned(filepath):
     return static_file(filepath, root="web/static/usually-returned")
+
+
+@enable_cors
+@get("/wrong-size/<filepath:path>")
+def wrong_size(filepath):
+    return static_file(filepath, root="web/static/wrong-size")
 
 
 if __name__ == '__main__':

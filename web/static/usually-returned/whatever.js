@@ -1,3 +1,5 @@
+const API_URL = 'https://junction-retail.herokuapp.com';
+
 const checkoutBtn = document.querySelector('[name="proceedToRetailCheckout"]');
 
 const chatbotBox = document.querySelector('#chatbot');
@@ -12,15 +14,7 @@ checkoutBtn.addEventListener('click', e => {
     e.preventDefault();
 
     showChatbot();
-    sendIndicator();
-
-    setTimeout(() => {
-        sendChat('Hey! Looks like you usually return those kind of products :/', false)
-        sendIndicator();
-    }, 700);
-    setTimeout(() => {
-        sendChat('Are you sure you need these?', false)
-    }, 2500);
+    sendChat('');
 });
 
 document.querySelector('.chatbot-form').addEventListener('submit', e => {
@@ -44,27 +38,45 @@ const hideChatbot = () => {
 
     chatbotBox.classList.add('chatbot-hidden');
     chatbotOverlay.classList.add('chatbot-hidden');
-
 };
 
 let messagesState = [];
 let writingIndicator = false;
 
-const sendChat = (message, mine) => {
-    if (!mine) {
-        messagesState = messagesState.filter(item => !item.indicator);
-    }
-
+const sendChat = (message) => {
     messagesState.push({
         message: message,
-        mine: mine
+        mine: true
     });
-
     renderMessages();
+
+    fetch(API_URL + '/chat', {
+        method: 'POST',
+        body: new FormData({
+            case_tag: message == '' ? 'returned_stuff' : '',
+            input: message,
+            size: 0.0
+        })
+    })
+        .then(response => response.text())
+        .then(message => {
+            if (!mine) {
+                messagesState = messagesState.filter(item => !item.indicator);
+            }
+
+            messagesState.push({
+                message: message,
+                mine: false
+            });
+
+            renderMessages();
+        });
+
+    sendIndicator();
 };
 
 const sendIndicator = () => {
-    messagesState.push({indicator: true});
+    messagesState.push({ indicator: true });
 
     renderMessages();
 };

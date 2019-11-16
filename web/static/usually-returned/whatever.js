@@ -50,19 +50,18 @@ const sendChat = (message) => {
     });
     renderMessages();
 
+    const data = new FormData();
+    data.append('case_tag', message == '' ? 'refunded_stuff' : '');
+    data.append('input', message);
+    data.append('size', 0.0);
+
     fetch(API_URL + '/chat', {
         method: 'POST',
-        body: new FormData({
-            case_tag: message == '' ? 'returned_stuff' : '',
-            input: message,
-            size: 0.0
-        })
+        body: data
     })
         .then(response => response.text())
         .then(message => {
-            if (!mine) {
-                messagesState = messagesState.filter(item => !item.indicator);
-            }
+            messagesState = messagesState.filter(item => !item.indicator);
 
             messagesState.push({
                 message: message,

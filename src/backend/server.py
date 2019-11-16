@@ -2,6 +2,8 @@ import os
 
 from bottle import route, run, static_file, get, post, request
 
+from data.data_generator import gen_demo_1
+
 from backend.services import chat
 
 
@@ -24,5 +26,6 @@ def server_static(filepath):
 
 
 if __name__ == '__main__':
+    gen_demo_1()
     port = int(os.getenv("PORT"))
     run(host="0.0.0.0", port=port, debug=True)

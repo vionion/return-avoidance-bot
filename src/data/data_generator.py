@@ -98,7 +98,7 @@ def _gen_purchase_data(conn: Connection):
     conn.commit()
 
     demo_cus_name = "demo_customer"
-    demo_prod_size = 36
+    demo_prod_size = 7
     demo_prod_cat = "shoes"
 
     date_strs = [
@@ -133,7 +133,7 @@ def _gen_purchase_data(conn: Connection):
             "VALUES (?, ?, ?, ?, ?, ?)"
             "".format(PURCHASES_TABLE_NAME),
             (demo_cus_name, prod_name, purchase_timestamp, demo_prod_cat,
-             demo_prod_size + choice([-0.5, 0, 0.5]),
+             demo_prod_size + choice([-0.5, 0, 0.5], 1, p=[0.25, 0.5, 0.25]),
              prod_price))
 
         conn.commit()

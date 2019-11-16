@@ -9,23 +9,24 @@ default_dialog_options = {
 
 
 def chat(case_tag, size, input):
-    lowercase = input.lower()
     dialog_options = default_dialog_options
     if case_tag == "size":
         is_normal, usual_size = is_normal_size(size)
         if not is_normal:
             return "You usually buy products of different size. Are you sure you want to proceed with size {} " \
                    "instead of {} which you usually buy?".format(size, usual_size)
-        else:
-            return None
     elif case_tag == "refunded_stuff":
         return "We recently experienced a lot of returns for this product. Maybe you want to look for alternatives?"
     elif case_tag == "price":
         return "We noticed that you usually buy products from different price category. " \
                "Just checking if you want to continue."
-    for answer in dialog_options:
-        if lowercase in dialog_options[answer]:
-            return answer
+    if input:
+        for answer in dialog_options:
+            lowercase = input.lower()
+
+            if lowercase in dialog_options[answer]:
+                return answer
+    return None
 
 
 def is_normal_size(size: float, demo_cus_name: str = "demo_customer", is_flex: bool = False):

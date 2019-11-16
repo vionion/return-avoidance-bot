@@ -44,11 +44,13 @@ let messagesState = [];
 let writingIndicator = false;
 
 const sendChat = (message) => {
-    messagesState.push({
-        message: message,
-        mine: true
-    });
-    renderMessages();
+    if (message != '') {
+        messagesState.push({
+            message: message,
+            mine: true
+        });
+        renderMessages();
+    }
 
     const data = new FormData();
     data.append('case_tag', message == '' ? 'refunded_stuff' : '');
@@ -61,6 +63,8 @@ const sendChat = (message) => {
     })
         .then(response => response.text())
         .then(message => {
+            if (message) return;
+
             messagesState = messagesState.filter(item => !item.indicator);
 
             messagesState.push({

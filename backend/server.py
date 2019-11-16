@@ -1,3 +1,5 @@
+import os
+
 from bottle import route, run, static_file, get, post, request
 from dotenv import load_dotenv
 
@@ -24,4 +26,5 @@ def server_static(filepath):
 
 if __name__ == '__main__':
     load_dotenv()
-    run(host="localhost", port=8080, debug=True)
+    port = int(os.getenv("PORT"))
+    run(host="0.0.0.0", port=port, debug=True)

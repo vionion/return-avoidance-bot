@@ -1,6 +1,7 @@
-from src.data.db_conn import get_shopping_history, get_products_by_prod_cat
 import numpy as np
 from sklearn.cluster import KMeans
+
+from src.data.db_conn import get_shopping_history, get_products_by_prod_cat
 
 default_dialog_options = {
     "ok, removing":
@@ -8,7 +9,9 @@ default_dialog_options = {
     "if you say so":
         ["no", "nope", "abort", "cancel"],
     "( ͡° ͜ʖ ͡°)":
-        ["maybe"]
+        ["maybe", "i don't know", "not sure"],
+    "Al right, done!":
+        ["ok", "sure", "why not"]
 }
 
 

@@ -123,16 +123,23 @@ const sendChat = (message) => {
     })
         .then(response => response.text())
         .then(message => {
-            if (message == '') return;
-
             messagesState = messagesState.filter(item => !item.indicator);
+
+            if (message == '') return;
 
             messagesState.push({
                 message: message,
                 mine: false
             });
 
-            renderMessages();
+            setTimeout(() => renderMessages(), 1000);
+
+            if (message.startsWith('ok') || message.startsWith('Al ')) {
+                setTimeout(() => {
+                    hideChatbot();
+                    alert('Added item to the basket! ( ͡° ͜ʖ ͡°)');
+                }, 3000);
+            }
         });
 
     sendIndicator();

@@ -98,8 +98,7 @@ def _gen_purchase_data(conn: Connection):
     conn.commit()
 
     demo_cus_name = "demo_customer"
-    demo_prod_size = choice([5, 7, 9])
-    print(demo_prod_size)
+    demo_prod_size = 7
     demo_prod_cat = "shoes"
 
     date_strs = [

@@ -18,6 +18,8 @@ default_dialog_options = {
 def chat(case_tag, size, input):
     dialog_options = default_dialog_options
     if case_tag == "size":
+        if not size:
+            return "Please, select size"
         is_normal, usual_size = is_normal_size(size)
         if not is_normal:
             return "You usually buy products of different size. Are you sure you want to proceed with size {} " \

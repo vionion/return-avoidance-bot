@@ -133,7 +133,7 @@ def _gen_purchase_data(conn: Connection):
             "VALUES (?, ?, ?, ?, ?, ?)"
             "".format(PURCHASES_TABLE_NAME),
             (demo_cus_name, prod_name, purchase_timestamp, demo_prod_cat,
-             demo_prod_size + choice([-0.5, 0, 0.5], p=[0.25, 0.5, 0.25]),
+             demo_prod_size,
              prod_price))
 
         conn.commit()

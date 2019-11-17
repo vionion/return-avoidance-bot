@@ -125,16 +125,16 @@ const sendChat = (message) => {
         .then(message => {
             messagesState = messagesState.filter(item => !item.indicator);
 
-            if (message == '') return;
+            if (message != '') {
+                messagesState.push({
+                    message: message,
+                    mine: false
+                });
+    
+                setTimeout(() => renderMessages(), 1000);
+            }
 
-            messagesState.push({
-                message: message,
-                mine: false
-            });
-
-            setTimeout(() => renderMessages(), 1000);
-
-            if (message.startsWith('ok') || message.startsWith('Al ')) {
+            if (message.startsWith('ok') || message.startsWith('Al ') || message == '') {
                 setTimeout(() => {
                     hideChatbot();
                     alert('Added item to the basket! ( ͡° ͜ʖ ͡°)');

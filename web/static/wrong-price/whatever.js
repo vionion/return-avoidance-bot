@@ -63,18 +63,20 @@ const sendChat = (message) => {
     })
         .then(response => response.text())
         .then(message => {
-            if (message == '') return;
-
             messagesState = messagesState.filter(item => !item.indicator);
 
-            messagesState.push({
-                message: message,
-                mine: false
-            });
+            if (message != '') {
+                messagesState.push({
+                    message: message,
+                    mine: false
+                });
+    
+                setTimeout(() => renderMessages(), 1000);
+            }
 
             setTimeout(() => renderMessages(), 1000);
 
-            if (message.startsWith('ok') || message.startsWith('Al ')) {
+            if (message.startsWith('ok') || message.startsWith('Al ') || message == '') {
                 setTimeout(() => {
                     hideChatbot();
                     alert('Added item to the basket! ( ͡° ͜ʖ ͡°)');
